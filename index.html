@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Lounge | Premium Shisha & Bar Koblenz</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES FOR THEMING --- */
+        :root {
+            /* Default Theme: Midnight (Purple/Gold) */
+            --bg-primary: #0f0518;
+            --blob-1: #581c87;
+            --blob-2: #4c1d95;
+            --blob-3: #7e22ce;
+            
+            --accent-primary: #eab308; /* Gold/Amber */
+            --accent-secondary: #a855f7; /* Purple */
+            --text-accent: #d8b4fe;
+            
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(168, 85, 247, 0.2);
+            --glass-shadow: rgba(88, 28, 135, 0.4);
+            
+            --headline-grad-1: #bf953f;
+            --headline-grad-2: #fcf6ba;
+            --headline-grad-3: #aa771c;
+            
+            /* Reduziertes Leuchten für eleganteren Look */
+            --glow-color: rgba(191, 149, 63, 0.3);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            color: #ffffff;
+            transition: background-color 0.8s ease;
+        }
+
+        /* --- Helper Classes for Theme Variables (Overriding Tailwind) --- */
+        .text-accent-primary { color: var(--accent-primary) !important; }
+        .text-accent-secondary { color: var(--accent-secondary) !important; }
+        .text-subtle { color: var(--text-accent) !important; }
+        .border-accent { border-color: var(--glass-border) !important; }
+        .bg-accent-glass { background-color: var(--glass-bg) !important; }
+
+        /* --- Lenis Smooth Scroll CSS --- */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+        /* --- Theme Toggle Button --- */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--glow-color);
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Enhanced Background Animation Blobs --- */
+        .blob {
+            position: fixed;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+            transition: background 1s ease;
+        }
+        
+        .blob-1 {
+            top: -10%; left: -10%; width: 600px; height: 600px;
+            background: var(--blob-1);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: float 12s infinite alternate ease-in-out;
+        }
+        
+        .blob-2 {
+            bottom: -10%; right: -10%; width: 700px; height: 700px;
+            background: var(--blob-2);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: float-reverse 15s infinite alternate ease-in-out;
+        }
+
+        .blob-3 {
+            top: 40%; left: 40%; width: 400px; height: 400px;
+            background: var(--blob-3);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: pulse-move 10s infinite alternate ease-in-out;
+            opacity: 0.5;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { transform: translate(30px, 20px) rotate(5deg) scale(1.05); }
+            100% { transform: translate(-20px, 50px) rotate(-5deg) scale(1); }
+        }
+
+        @keyframes float-reverse {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            100% { transform: translate(-40px, -40px) rotate(10deg) scale(1.1); }
+        }
+
+        @keyframes pulse-move {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            50% { transform: translate(-20px, 20px) scale(1.2); opacity: 0.6; }
+            100% { transform: translate(20px, -20px) scale(1); opacity: 0.4; }
+        }
+
+        /* --- ENHANCED GOLD GRADIENT & REFINED GLOW EFFECT --- */
+        .text-gradient-gold {
+            background: linear-gradient(
+                to right, 
+                var(--headline-grad-1), 
+                var(--headline-grad-2), 
+                var(--headline-grad-3), 
+                var(--headline-grad-2), 
+                var(--headline-grad-1)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 6s linear infinite; /* Etwas langsamer für mehr Eleganz */
+            /* Reduzierter, weicherer Drop-Shadow */
+            filter: drop-shadow(0 0 5px var(--glow-color));
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* --- Liquid Glass Effect (Dynamic) --- */
+        .glass-panel {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), var(--glass-bg));
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -10px var(--glass-shadow);
+            transition: all 0.5s ease;
+        }
+
+        .glass-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), var(--glass-bg));
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 15px var(--glow-color);
+            border-color: var(--accent-primary);
+        }
+
+        .glass-input {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+        
+        .glass-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* Timeline specific styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 24px;
+            border-left: 2px solid var(--glass-border);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px; top: 6px; width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        /* List Styling */
+        ul.service-list li {
+            position: relative; padding-left: 1.5rem; margin-bottom: 0.5rem;
+            font-size: 0.9rem; color: var(--text-accent);
+        }
+        ul.service-list li::before {
+            content: '•'; position: absolute; left: 0;
+            color: var(--accent-primary); font-weight: bold;
+        }
+        
+        /* Toast */
+        #toast {
+            visibility: hidden; min-width: 250px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--accent-primary);
+            color: #fff; text-align: center; border-radius: 12px; padding: 16px;
+            position: fixed; z-index: 100; left: 50%; bottom: 30px;
+            transform: translateX(-50%); font-size: 14px;
+            box-shadow: 0 0 15px var(--glow-color);
+            opacity: 0; transition: all 0.5s;
+        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+        /* Marquee */
+        .marquee-container {
+            display: flex; overflow: hidden; user-select: none;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            flex-shrink: 0; display: flex; gap: 2rem; min-width: 100%;
+            animation: scroll 30s linear infinite;
+        }
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 2rem)); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8 selection:bg-purple-500 selection:text-white">
+
+    <!-- Theme Switcher Button -->
+    <button onclick="switchTheme()" class="theme-toggle" title="Design wechseln">
+        <i class="fa-solid fa-palette"></i>
+    </button>
+
+    <!-- Ambient Background -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Main Content Container -->
+    <main class="w-full max-w-2xl space-y-6 z-10">
+
+        <!-- 1. MAIN IDENTITY CARD -->
+        <div class="glass-panel rounded-[2.5rem] overflow-hidden group">
+            
+            <div class="relative h-80 w-full">
+                <!-- Background Image (Filtered) -->
+                <!-- Removed 'alt' text content to prevent visual clutter if image loads slowly -->
+                <img src="https://images.unsplash.com/photo-1577543593060-d6676f68742b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3" 
+                     alt="" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-80 transition-opacity duration-500">
+                
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-[var(--bg-primary)]/70 to-[var(--bg-primary)]/10"></div>
+                
+                <div class="absolute inset-0 flex flex-col items-center justify-end pb-8 px-6 text-center z-10">
+                    <div class="absolute top-6 right-6 flex items-center gap-2">
+                         <span class="w-3 h-3 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.5)] animate-pulse"></span>
+                         <span class="text-xs font-semibold text-green-400 drop-shadow-md">Open Now</span>
+                    </div>
+
+                    <div class="inline-block px-3 py-1 rounded-full bg-accent-glass border border-accent backdrop-blur-md text-subtle text-xs font-semibold tracking-wide uppercase mb-3 shadow-lg">
+                        Premium Lounge in Koblenz
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2 tracking-tight text-gradient-gold pb-2">Midnight Lounge</h1>
+                    
+                    <p class="text-subtle text-sm font-medium uppercase tracking-wide drop-shadow-lg shadow-black">
+                        Premium Shisha · Cocktails · Chillout Area<br>
+                        <span class="text-xs text-slate-400 normal-case font-normal opacity-90">Täglich frisch gemixte Drinks & Snacks</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Half: Actions -->
+            <div class="p-6 md:p-8 flex flex-col items-center gap-6 bg-gradient-to-b from-[var(--bg-primary)]/50 to-transparent">
+                <div class="flex flex-wrap justify-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300" title="Kostenloses WLAN">
+                        <i class="fa-solid fa-wifi text-accent-secondary mr-1"></i> Free WiFi
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300" title="Live Fußball">
+                        <i class="fa-solid fa-futbol text-accent-secondary mr-1"></i> Sky Sports
+                    </span>
+                    <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-300" title="Klimatisiert">
+                        <i class="fa-solid fa-snowflake text-accent-secondary mr-1"></i> AC
+                    </span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 w-full">
+                    <a href="tel:+49123456789" class="glass-btn px-6 py-3 rounded-full text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-accent-primary"></i>
+                        Tisch reservieren
+                    </a>
+                    <a href="#" class="glass-btn px-6 py-3 rounded-full text-sm font-semibold text-white/80 hover:text-white transition-colors" title="Karte ansehen">
+                        <i class="fa-solid fa-book-open mr-2 text-accent-primary"></i> Digitale Karte
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. STATUS / INFO BAR -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="glass-panel rounded-3xl p-4 text-center hover:bg-white/5 transition-colors cursor-default">
+                <div class="text-accent-secondary text-lg mb-1"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="text-xs text-slate-400 uppercase font-semibold">Location</div>
+                <div class="text-sm font-medium text-white">56068 Koblenz</div>
+            </div>
+            <div class="glass-panel rounded-3xl p-4 text-center hover:bg-white/5 transition-colors cursor-default">
+                <div class="text-accent-primary text-lg mb-1"><i class="fa-solid fa-clock"></i></div>
+                <div class="text-xs text-slate-400 uppercase font-semibold">Happy Hour</div>
+                <div class="text-sm font-medium text-white">18:00 - 20:00</div>
+            </div>
+            <div class="glass-panel rounded-3xl p-4 text-center hover:bg-white/5 transition-colors cursor-default col-span-2 md:col-span-1">
+                <div class="text-accent-secondary text-lg mb-1"><i class="fa-solid fa-phone"></i></div>
+                <div class="text-xs text-slate-400 uppercase font-semibold">Kontakt</div>
+                <div class="text-sm font-medium text-white">0170 – 1234567</div>
+            </div>
+        </div>
+
+        <!-- 2.5 MARQUEE SECTION -->
+        <section class="overflow-hidden py-6 opacity-80">
+            <div class="marquee-container">
+                <div class="marquee-content text-subtle font-bold text-lg uppercase tracking-widest" style="text-shadow: 0 0 15px var(--glass-border);">
+                    <span>Doppelapfel</span> <span>•</span> <span>Love 66</span> <span>•</span> <span>Traube Minze</span> <span>•</span> <span>Black Nana</span> <span>•</span> <span>Koblenz</span> <span>•</span> <span>African Queen</span> <span>•</span> <span>Ice Bazooka</span> <span>•</span> <span>Chillout</span> <span>•</span> <span>Tingle Tangle</span> <span>•</span> <span>Lady Killer</span> <span>•</span> <span>Cold Peach</span> <span>•</span> <span>Smoke</span>
+                </div>
+                <!-- Duplicate -->
+                <div class="marquee-content text-subtle font-bold text-lg uppercase tracking-widest" aria-hidden="true" style="text-shadow: 0 0 15px var(--glass-border);">
+                    <span>Doppelapfel</span> <span>•</span> <span>Love 66</span> <span>•</span> <span>Traube Minze</span> <span>•</span> <span>Black Nana</span> <span>•</span> <span>Koblenz</span> <span>•</span> <span>African Queen</span> <span>•</span> <span>Ice Bazooka</span> <span>•</span> <span>Chillout</span> <span>•</span> <span>Tingle Tangle</span> <span>•</span> <span>Lady Killer</span> <span>•</span> <span>Cold Peach</span> <span>•</span> <span>Smoke</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. WELCOME TEXT -->
+        <div class="glass-panel rounded-[2.5rem] p-8">
+            <h2 class="text-xl font-bold text-gradient-gold mb-4 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm text-white"><i class="fa-solid fa-fire-flame-curved text-accent-primary"></i></span>
+                Willkommen in der Lounge
+            </h2>
+            <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+                Entspanne dich in moderner Atmosphäre bei den besten Shisha-Sorten der Stadt. Egal ob After-Work, Wochenende mit Freunden oder zum Fußball schauen – wir bieten dir den perfekten Vibe.<br><br>
+                Genieße unsere große Auswahl an Premium-Tabak, exotischen Cocktails und hausgemachten Eistees. Qualität und Service stehen bei uns an erster Stelle.
+            </p>
+        </div>
+
+        <!-- 4. SERVICES TOGGLES -->
+        <div class="glass-panel rounded-[2.5rem] p-8">
+            <h2 class="text-xl font-bold text-gradient-gold mb-6 flex items-center gap-3">
+                <span class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-sm text-white"><i class="fa-solid fa-list text-accent-primary"></i></span>
+                Unsere Angebote
+            </h2>
+            
+            <div class="flex flex-col gap-4">
+                
+                <!-- Toggle 1 -->
+                <div class="bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all duration-300">
+                    <button onclick="toggleAccordion('shisha')" class="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="p-2 bg-accent-glass rounded-lg text-accent-secondary">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Shisha & Tabak</h3>
+                        </div>
+                        <i id="icon-shisha" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div id="shisha" class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-white/5">
+                        <ul class="service-list mt-2 space-y-2">
+                            <li><strong>Darkside</strong> (Core & Base Line)</li>
+                            <li><strong>Nameless</strong> (Black Nana, #40)</li>
+                            <li><strong>Holster</strong> (Ice Kaktuz, Quwi Punch)</li>
+                            <li><strong>O's Tobacco</strong> (African Queen, Bonnie 'n Clyde)</li>
+                            <li>Edelstahl-Pfeifen (Moze, Aeon, Steamulation)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Toggle 2 -->
+                <div class="bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all duration-300">
+                    <button onclick="toggleAccordion('drinks')" class="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="p-2 bg-accent-glass rounded-lg text-accent-secondary">
+                                <i class="fa-solid fa-martini-glass-citrus"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Drinks & Cocktails</h3>
+                        </div>
+                        <i id="icon-drinks" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div id="drinks" class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-white/5">
+                        <ul class="service-list mt-2 space-y-2">
+                            <li>Hausgemachte Eistees (Pfirsich, Zitrone)</li>
+                            <li>Mojito & Caipirinha (Classic & Fruity)</li>
+                            <li>Shots (Berliner Luft, Tequila)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Toggle 3 -->
+                <div class="bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all duration-300">
+                    <button onclick="toggleAccordion('specials')" class="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="p-2 bg-accent-glass rounded-lg text-accent-secondary">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <h3 class="font-semibold text-white">Snacks & Specials</h3>
+                        </div>
+                        <i id="icon-specials" class="fa-solid fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                    </button>
+                    
+                    <div id="specials" class="hidden p-5 pt-0 text-slate-300 text-sm border-t border-white/5">
+                        <div class="space-y-6 mt-2">
+                            <div class="bg-white/5 rounded-xl p-4">
+                                <h4 class="text-white font-semibold mb-2 text-xs uppercase tracking-wide">Für den kleinen Hunger</h4>
+                                <ul class="service-list space-y-1">
+                                    <li>Nachos mit Käse- oder Salsa-Dip</li>
+                                    <li>Gemischte Nüsse & Salzstangen</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 5. NEW ARRIVALS -->
+        <div class="glass-panel rounded-[2.5rem] p-8 border-l-4 border-accent">
+            <h2 class="text-xl font-bold text-gradient-gold mb-4">Neu im Sortiment</h2>
+            <p class="text-slate-300 text-sm mb-4">
+                Wir haben unser Setup geupgradet! Ab sofort raucht ihr bei uns standardmäßig mit den neuen <strong class="text-white">Steamulation Pro X Prime</strong> Pfeifen.
+            </p>
+            <div class="bg-white/5 rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-accent-glass flex items-center justify-center text-accent-primary">
+                    <i class="fa-solid fa-check-double text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white">High-End Setup</h3>
+                    <p class="text-xs text-slate-400">Steamulation Pfeifen + Oblako Phunnels + Kaloud HMDs.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. CONTACT SECTION -->
+        <div id="kontakt" class="glass-panel rounded-[2.5rem] p-8 md:p-10">
+            <h2 class="text-xl font-bold text-gradient-gold mb-6 text-center">Reservierung & Kontakt</h2>
+            
+            <div class="bg-white/5 rounded-2xl p-6 mb-8 text-center border border-white/5">
+                <h3 class="font-bold text-white text-lg">Midnight Lounge</h3>
+                <p class="text-subtle text-sm mb-4">Shisha Bar & Cocktail Lounge</p>
+                
+                <div class="space-y-2 text-sm text-slate-300">
+                    <p><i class="fa-solid fa-map-pin mr-2 text-accent-secondary"></i> Hauptstraße 42 | 56068 Koblenz</p>
+                    <p><i class="fa-solid fa-phone mr-2 text-accent-secondary"></i> Tel. 0170 – 1234567</p>
+                    <p><i class="fa-solid fa-envelope mr-2 text-accent-secondary"></i> booking@midnight-lounge.de</p>
+                </div>
+            </div>
+
+            <form onsubmit="handleSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-400 ml-2">Name</label>
+                        <input type="text" placeholder="Dein Name" class="w-full px-4 py-3 rounded-xl glass-input placeholder-slate-500 focus:ring-2 focus:ring-amber-500/50 transition-all">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-400 ml-2">Personen</label>
+                        <select class="w-full px-4 py-3 rounded-xl glass-input placeholder-slate-500 focus:ring-2 focus:ring-amber-500/50 transition-all">
+                            <option value="" class="text-black">Anzahl wählen...</option>
+                            <option value="2" class="text-black">2 Personen</option>
+                            <option value="group" class="text-black">Größere Gruppe</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-400 ml-2">Nachricht / Datum</label>
+                    <textarea rows="3" placeholder="Wann möchtet ihr kommen? Besondere Wünsche?" class="w-full px-4 py-3 rounded-xl glass-input placeholder-slate-500 focus:ring-2 focus:ring-amber-500/50 transition-all resize-none"></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl glass-btn text-white font-bold transition-all transform hover:scale-[1.02] text-accent-primary">
+                    Anfrage senden
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+                <p>&copy; 2024 Midnight Lounge Koblenz</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-white transition-colors">Impressum</a>
+                    <a href="#" class="hover:text-white transition-colors">Datenschutz</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast">Anfrage gesendet! Wir bestätigen gleich.</div>
+
+    <!-- Lenis Library (Updated to latest for better compatibility) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <!-- JS -->
+    <script>
+        // --- THEME ENGINE ---
+        const themes = [
+            {
+                name: 'Midnight (Purple)',
+                colors: {
+                    '--bg-primary': '#0f0518',
+                    '--blob-1': '#581c87', '--blob-2': '#4c1d95', '--blob-3': '#7e22ce',
+                    '--accent-primary': '#eab308', /* Gold */
+                    '--accent-secondary': '#a855f7', /* Purple */
+                    '--text-accent': '#d8b4fe',
+                    '--headline-grad-1': '#bf953f', '--headline-grad-2': '#fcf6ba', '--headline-grad-3': '#aa771c',
+                    '--glow-color': 'rgba(191, 149, 63, 0.3)',
+                    '--glass-bg': 'rgba(88, 28, 135, 0.1)',
+                    '--glass-border': 'rgba(168, 85, 247, 0.2)',
+                    '--glass-shadow': 'rgba(88, 28, 135, 0.4)'
+                }
+            },
+            {
+                name: 'Ice Mint (Blue/Cyan)',
+                colors: {
+                    '--bg-primary': '#020617',
+                    '--blob-1': '#0ea5e9', '--blob-2': '#0284c7', '--blob-3': '#38bdf8',
+                    '--accent-primary': '#22d3ee', /* Cyan */
+                    '--accent-secondary': '#60a5fa', /* Blue */
+                    '--text-accent': '#bae6fd',
+                    '--headline-grad-1': '#0891b2', '--headline-grad-2': '#a5f3fc', '--headline-grad-3': '#164e63',
+                    '--glow-color': 'rgba(34, 211, 238, 0.3)',
+                    '--glass-bg': 'rgba(2, 132, 199, 0.1)',
+                    '--glass-border': 'rgba(56, 189, 248, 0.2)',
+                    '--glass-shadow': 'rgba(8, 145, 178, 0.4)'
+                }
+            },
+            {
+                name: 'Volcano (Red/Orange)',
+                colors: {
+                    '--bg-primary': '#1a0505',
+                    '--blob-1': '#991b1b', '--blob-2': '#7f1d1d', '--blob-3': '#ef4444',
+                    '--accent-primary': '#f97316', /* Orange */
+                    '--accent-secondary': '#ef4444', /* Red */
+                    '--text-accent': '#fca5a5',
+                    '--headline-grad-1': '#b91c1c', '--headline-grad-2': '#fdba74', '--headline-grad-3': '#7c2d12',
+                    '--glow-color': 'rgba(249, 115, 22, 0.3)',
+                    '--glass-bg': 'rgba(153, 27, 27, 0.1)',
+                    '--glass-border': 'rgba(248, 113, 113, 0.2)',
+                    '--glass-shadow': 'rgba(127, 29, 29, 0.4)'
+                }
+            },
+            {
+                name: 'Double Apple (Green/Lime)',
+                colors: {
+                    '--bg-primary': '#021204',
+                    '--blob-1': '#15803d', '--blob-2': '#14532d', '--blob-3': '#22c55e',
+                    '--accent-primary': '#84cc16', /* Lime */
+                    '--accent-secondary': '#22c55e', /* Green */
+                    '--text-accent': '#bbf7d0',
+                    '--headline-grad-1': '#166534', '--headline-grad-2': '#d9f99d', '--headline-grad-3': '#365314',
+                    '--glow-color': 'rgba(132, 204, 22, 0.3)',
+                    '--glass-bg': 'rgba(21, 128, 61, 0.1)',
+                    '--glass-border': 'rgba(74, 222, 128, 0.2)',
+                    '--glass-shadow': 'rgba(20, 83, 45, 0.4)'
+                }
+            }
+        ];
+
+        let currentThemeIndex = 0;
+
+        function switchTheme() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const theme = themes[currentThemeIndex];
+            
+            // Show toast for theme name
+            const toast = document.getElementById("toast");
+            toast.innerText = `Style: ${theme.name}`;
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 1500);
+
+            // Apply variables
+            const root = document.documentElement;
+            for (const [key, value] of Object.entries(theme.colors)) {
+                root.style.setProperty(key, value);
+            }
+        }
+
+        // --- LENIS SCROLLING ---
+        // Ensure standard easing for smooth feel
+        const lenis = new Lenis({
+            duration: 1.5, // Increased duration for smoother feeling
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical', 
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // --- ACCORDION ---
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // --- SUBMIT ---
+        function handleSubmit(event) {
+            event.preventDefault();
+            const toast = document.getElementById("toast");
+            toast.innerText = "Anfrage gesendet! Wir bestätigen gleich.";
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
+</body>
+</html>
